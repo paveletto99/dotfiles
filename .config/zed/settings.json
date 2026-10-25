@@ -1,0 +1,178 @@
+// // Zed settings
+// //
+// // For information on how to configure Zed, see the Zed
+// // documentation: https://zed.dev/docs/configuring-zed
+// //
+// // To see all of Zed's default settings without changing your
+// // custom settings, run `zed: open default settings` from the
+// // command palette (cmd-shift-p / ctrl-shift-p)
+// {
+//   "telemetry": {
+//     "diagnostics": true,
+//     "metrics": true,
+//     "anthropic_retention": false
+//   },
+//   "vim_mode": true,
+//   "agent_servers": {
+//     "codex-acp": {
+//       "type": "registry"
+//     }
+//   },
+//   "agent": {
+//     "default_model": {
+//       "enable_thinking": true,
+//       "provider": "ollama",
+//       "model": "gemma4:e4b"
+//     },
+//     // "inline_alternatives": [
+//     //       {
+//     //         "provider": "zed.dev",
+//     //         "model": "gpt-4o"
+//     //       }
+//     //     ],
+//     "version": "2"
+//   },
+//   "features": {
+//     "edit_prediction_provider": "zed"
+//   },
+//   "ui_font_size": 16,
+//   "buffer_font_size": 16,
+//   "theme": {
+//     "mode": "system",
+//     "light": "One Light",
+//     "dark": "One Dark"
+//   },
+//   "language.rust": {
+//     "lsp": "rust-analyzer",
+//     "formatOnSave": true,
+//     "linter": "clippy",
+//     "rust-analyzer": {
+//       "cargo": {
+//         "allFeatures": true,
+//         "loadOutDirsFromCheck": true
+//       },
+//       "procMacro": {
+//         "enable": true
+//       },
+//       "checkOnSave": {
+//         "command": "clippy"
+//       },
+//       "inlayHints": {
+//         "enable": true,
+//         "parameterHints": true,
+//         "chainingHints": true
+//       }
+//     },
+//     "keybindings": [
+//       {
+//         "key": "Ctrl+Alt+B",
+//         "command": "zed.terminal.run",
+//         "args": { "command": "cargo build" }
+//       },
+//       {
+//         "key": "Ctrl+Alt+R",
+//         "command": "zed.terminal.run",
+//         "args": { "command": "cargo run" }
+//       },
+//       {
+//         "key": "Ctrl+Alt+T",
+//         "command": "zed.terminal.run",
+//         "args": { "command": "cargo test" }
+//       },
+//       {
+//         "key": "Ctrl+Alt+L",
+//         "command": "zed.terminal.run",
+//         "args": { "command": "cargo clippy" }
+//       }
+//     ]
+//   }
+// }
+{
+  "agent_ui_font_size": 15,
+  "icon_theme": "Zed (Default)",
+  "edit_predictions": {
+    "provider": "zed",
+    "mode": "eager",
+    "disabled_globs": [
+      "**/.env*",
+      "**/.dev.vars",
+      "**/*.pem",
+      "**/*.key",
+      "**/*.cert",
+      "**/*.crt",
+      "**/secrets.yml"
+    ]
+  },
+  "show_whitespaces": "boundary",
+  "vim_mode": true,
+  "ui_font_family": "IoskeleyMono Nerd Font",
+  "buffer_font_family": "IoskeleyMono Nerd Font",
+  "ui_font_size": 16.0,
+  "buffer_font_size": 14,
+  "ui_font_weight": 500,
+  "soft_wrap": "editor_width",
+  "relative_line_numbers": "enabled",
+  "current_line_highlight": "gutter",
+  "inlay_hints": {
+    "show_type_hints": false,
+    "enabled": true
+  },
+  "vim": {
+    "use_system_clipboard": "always"
+  },
+  "theme": "Catppuccin Mocha",
+  "languages": {
+    "Markdown-Inline": {
+      "enable_language_server": true
+    },
+    "Markdown": {
+      "soft_wrap": "editor_width",
+      "format_on_save": "off"
+    }
+  },
+  "git_panel": {
+    "dock": "right"
+  },
+  "project_panel": {
+    "dock": "right"
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "cursor_shape": "block",
+  "scrollbar": {
+    "show": "auto",
+    "git_diff": true,
+    "diagnostics": "all"
+  },
+  "agent": {
+    "tool_permissions": {
+      "default": "allow"
+    },
+    "inline_assistant_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5-latest"
+    },
+    "dock": "right",
+    "enabled": true,
+    "default_model": {
+      "effort": "medium",
+      "enable_thinking": true,
+      "provider": "zed.dev",
+      "model": "gpt-5.5"
+    }
+  },
+  "terminal": {
+    "font_family": "IoskeleyMono Nerd Font",
+    "blinking": "off",
+    "working_directory": "current_project_directory"
+  },
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000
+    }
+  }
+}

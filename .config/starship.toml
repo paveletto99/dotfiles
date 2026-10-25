@@ -1,0 +1,5 @@
+# Allow Git status checks in larger repositories to finish.
+command_timeout = 2000
+
+# ____________________ REVIEW ____________________
+# Retained 2000 ms timeout for large repositories; measure prompt latency before reducing.

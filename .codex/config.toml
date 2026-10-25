@@ -1,0 +1,21 @@
+# Portable live Codex preferences. Host integrations are in ignored local/codex.toml.
+# ____________________ REVIEW ____________________
+# The existing approval/sandbox policies are retained; review before deploying to another host.
+"personality" = "pragmatic"
+"approval_policy" = "never"
+"web_search" = "cached"
+"file_opener" = "vscode"
+"approvals_reviewer" = "user"
+"plan_mode_reasoning_effort" = "high"
+"model" = "gpt-6.1-sol"
+"model_reasoning_effort" = "high"
+"sandbox_mode" = "danger-full-access"
+
+["features"]
+"hooks" = true
+"multi_agent" = true
+"js_repl" = false
+
+["tui"]
+"status_line" = ["model-with-reasoning", "current-dir", "thread-name", "five-hour-limit", "weekly-limit"]
+"status_line_use_colors" = true

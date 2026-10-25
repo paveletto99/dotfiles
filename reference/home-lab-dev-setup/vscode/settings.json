@@ -1,0 +1,284 @@
+{
+  "editor.autoIndent": "full",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit",
+    "quickFix": "explicit"
+  },
+  "editor.codeLens": true,
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorStyle": "block",
+  "editor.fontFamily": "DepartureMono Nerd Font, FiraCode Nerd Font Mono, Hack, Hasklig, Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 16,
+  "editor.formatOnPaste": false,
+  "editor.mouseWheelZoom": true,
+  "editor.lineHeight": 22,
+  "editor.formatOnType": false,
+  "editor.formatOnSave": true,
+  "editor.letterSpacing": 0.5,
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "none",
+  "editor.semanticHighlighting.enabled": true,
+  "editor.tabCompletion": "on",
+  "editor.suggestSelection": "first",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "off",
+  "editor.accessibilitySupport": "off",
+  "editor.columnSelection": false,
+  "eslint.validate": ["typescript"],
+  "explorer.confirmDragAndDrop": false,
+  "files.autoSaveDelay": 1000,
+  // "dev.containers.dockerPath": "podman",
+  // "dev.containers.executeInWSL": true,
+  // "dev.containers.executeInWSLDistro": "Debian",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/*.js": {
+      "when": "$(basename).ts"
+    },
+    "**/*.js.map": {
+      "when": "$(basename)"
+    },
+    "**/node_modules": true, // this excludes all folders
+    // named "node_modules" from
+    // the explore tree
+    // alternative version
+    "node_modules": true, // this excludes the folder
+    // only from the root of
+    // your workspace
+    "**/dist": true, // this excludes all folders
+    // named "node_modules" from
+    // the explore tree
+    // alternative version
+    "dist": true // this excludes the folder
+    // only from the root of
+    // your workspace
+  },
+  "files.hotExit": "onExit",
+  // "files.defaultLanguage": "typescript",
+  "files.trimTrailingWhitespace": true,
+  "go.useLanguageServer": true,
+  "go.languageServerExperimentalFeatures": {
+    "diagnostics": true // for diagnostics as you type
+  },
+  "go.testOnSave": false,
+  "go.lintOnSave": "package",
+  "go.formatTool": "goimports",
+  "go.testFlags": ["-v"],
+  // "go.autocompleteUnimportedPackages": true,
+  "go.toolsManagement.autoUpdate": true,
+  "[go]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "never",
+      "source.fixAll": "explicit"
+    }
+  },
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.suggestSmartCommit": false,
+  "gitlens.views.repositories.includeWorkingTree": true,
+  "gitlens.gitCommands.skipConfirmations": [
+    "fetch:command",
+    "stash-push:command",
+    "switch:command",
+    "branch-create:command"
+  ],
+  "[azure-pipelines]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[helm]": {
+    "editor.formatOnSave": false
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": false
+  },
+  "markdown.styles": [
+    "https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+  ],
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
+    }
+  },
+  "notebook.formatOnSave.enabled": true,
+  "notebook.codeActionsOnSave": {
+    "notebook.source.fixAll": "explicit",
+    "notebook.source.organizeImports": "explicit"
+  },
+  "rust.full_docs": true,
+  "rust.features": [],
+  "rust.jobs": 4,
+  "rust-analyzer.checkOnSave.command": "clippy", // @todo(p.g) https://github.com/rust-lang/rust-clippy
+  "rust-analyzer.cargo.autoreload": true,
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "quickFix": "explicit",
+      "source.fixAll": "explicit"
+    }
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+  "terraform.experimentalFeatures.validateOnSave": false,
+  "terraform.languageServer.enable": true,
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.formatAll.terraform": "explicit"
+    }
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.formatAll.terraform": "explicit"
+    }
+  },
+  "todo-tree.highlights.defaultHighlight": {
+    "icon": "alert",
+    "foreground": "#228b22",
+    "background": "#ffffff",
+    "opacity": 90,
+    "type": "whole-line",
+    "iconColour": "#ba55d3"
+  },
+  "todo-tree.highlights.enabled": true,
+  "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "icon": "check-circle-fill",
+      "gutterIcon": true,
+      "iconColour": "#87CEEB",
+      "background": "#87CEEB",
+      "foreground": "#00008B"
+    },
+    "FIXME": {
+      "foreground": "#000000",
+      "iconColour": "#ffff00",
+      "gutterIcon": true,
+      "background": "#ffff00"
+    },
+    "BUG": {
+      "foreground": "#ffffff",
+      "iconColour": "#ff0000",
+      "gutterIcon": true,
+      "background": "#ff0000"
+    }
+  },
+  "todo-tree.general.tags": ["TODO", "FIXME", "COMPLETE", "BUG"],
+  "typescript.tsserver.log": "off",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.editor.highlightModifiedTabs": true,
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "omnisharp.enableAsyncCompletion": true,
+  "git.ignoreRebaseWarning": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "sonarlint.connectedMode.connections.sonarqube": [
+    {
+      "serverUrl": "https://sonarqube.fmcgds-np.com",
+      "connectionId": "vs-code"
+    }
+  ],
+  "sonarlint.rules": {
+    "typescript:S6544": {
+      "level": "off"
+    },
+    "typescript:S6759": {
+      "level": "off"
+    },
+    "go:S100": {
+      "level": "off"
+    }
+  },
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "extensions.ignoreRecommendations": true,
+  "window.density.editorTabHeight": "default",
+  "workbench.editor.pinnedTabsOnSeparateRow": true,
+  "[terraform][terraform-vars]": {
+    "editor.codeActionsOnSave": {
+      "source.formatAll.terraform": "explicit"
+    }
+  },
+  "remote.SSH.remotePlatform": {
+    "default": "linux"
+  },
+  "git.replaceTagsWhenPull": true,
+  "hediet.vscode-drawio.resizeImages": null,
+  "git.openRepositoryInParentFolders": "always",
+  "diffEditor.ignoreTrimWhitespace": true,
+  "files.autoSave": "afterDelay",
+  "git.ignoreMissingGitWarning": true,
+  "zig.zls.enabled": "on",
+  // You can more more Zig and ZLS options here
+
+  // Whether to enable build-on-save diagnostics
+  //
+  // Further information about build-on save:
+  // https://zigtools.org/zls/guides/build-on-save/
+  // "zig.zls.enableBuildOnSave": true,
+
+  // All nested settings will only affect Zig files.
+  "[zig]": {
+    // Formatting with ZLS matches `zig fmt`.
+    // The Zig FAQ answers some questions about `zig fmt`:
+    // https://github.com/ziglang/zig/wiki/FAQ
+    //
+    "editor.formatOnSave": true,
+
+    // "editor.inlayHints.enabled": "off",
+
+    // overwrite words when accepting completions
+    "editor.suggest.insertMode": "replace",
+    // The `foldingProviderModel` provides more accurate stick scroll scopes
+    "editor.stickyScroll.defaultModel": "foldingProviderModel",
+    "editor.codeActionsOnSave": {
+      // Run code actions that currently supports adding and removing discards.
+      // "source.fixAll": "explicit",
+      // Run code actions that sorts @import declarations.
+      // Available since ZLS `0.14.0-dev.188+2be424de5`
+      // "source.organizeImports": "explicit",
+    }
+  },
+  "editor.semanticTokenColorCustomizations": {
+    "rules": {
+      "*.deprecated": {
+        // highlight semantic tokens that are marked as "deprecated"
+        "strikethrough": true
+      }
+    }
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "workbench.colorCustomizations": {},
+  "github.copilot.selectedCompletionModel": "gpt-4o-copilot"
+}

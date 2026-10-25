@@ -1,0 +1,202 @@
+{
+  "skill_name": "cut-ready",
+  "evals": [
+    {
+      "id": "missing-geometry-input",
+      "prompt": "Create a formed sheet part from this sketch. Material and thickness are undecided.",
+      "expected_output": "Resolve inputs before the features they control; continue independent or clearly provisional work.",
+      "files": [],
+      "assertions": [
+        "Do not invent thickness or bend rules.",
+        "Do not claim a production-stage pass for unconfirmed geometry."
+      ]
+    },
+    {
+      "id": "print-and-cut",
+      "prompt": "Prepare this illustration as a contour-cut sticker; I have not chosen a printer.",
+      "expected_output": "Prepare a bounded physical-artwork handoff.",
+      "files": [],
+      "assertions": [
+        "Separate artwork from cut contour.",
+        "Do not use universal vendor bleed, spot-color, or color-profile rules."
+      ]
+    },
+    {
+      "id": "reconstruction",
+      "prompt": "Recreate this physical marking from photographs at its original size.",
+      "expected_output": "Record scale evidence and reconstruction uncertainty.",
+      "files": [],
+      "assertions": [
+        "Do not label estimated dimensions as measured.",
+        "Match the physical proof to fit uncertainty and distinguish it from digital preflight."
+      ]
+    },
+    {
+      "id": "narrow-color-revision",
+      "prompt": "Change only two colors in this accepted production file.",
+      "expected_output": "Preserve geometry and unrelated work.",
+      "files": [],
+      "assertions": [
+        "Verify the requested delta and unchanged geometry.",
+        "Do not require unrelated process intake or a new physical prototype."
+      ]
+    },
+    {
+      "id": "vinyl-laser",
+      "prompt": "Prepare this ordinary PVC vinyl graphic for laser cutting.",
+      "expected_output": "Preserve the fabrication goal while correcting the unsafe process.",
+      "files": [],
+      "assertions": [
+        "Do not call ordinary PVC/vinyl laser-safe.",
+        "Use a suitable non-laser route absent exact material and operator evidence."
+      ]
+    },
+    {
+      "id": "unverified-export",
+      "prompt": "The file exists, but I cannot independently reopen or parse it. Is it production-ready?",
+      "expected_output": "Identify the missing readback gate.",
+      "files": [],
+      "assertions": [
+        "Do not treat extension or existence as validation.",
+        "Use an evidence-bounded readiness status."
+      ]
+    },
+    {
+      "id": "print-geometry-only",
+      "prompt": "Preflight an STL for a print service. I only need checked geometry; the service chooses its printer.",
+      "expected_output": "Verify mesh, physical size, and functional geometry.",
+      "files": [],
+      "assertions": [
+        "Do not demand printer/nozzle details unnecessarily.",
+        "Do not claim slicer or physical validation."
+      ]
+    },
+    {
+      "id": "configured-3mf",
+      "prompt": "This generic 3MF contains a model but no machine settings. Deliver a configured Bambu project.",
+      "expected_output": "Distinguish geometry from a target-application project.",
+      "files": [],
+      "assertions": [
+        "Verify effective machine/material/process settings in the actual application.",
+        "If unavailable, report the specific unverified stage rather than inventing settings."
+      ]
+    },
+    {
+      "id": "slice-feature",
+      "prompt": "A valid manifold mesh has a thin wall absent from the slicer preview. Can it pass?",
+      "expected_output": "Judge the requested print stage from actual interpretation.",
+      "files": [],
+      "assertions": [
+        "Do not equate mesh integrity with feature realization.",
+        "Resolve missing wall or block that stage."
+      ]
+    },
+    {
+      "id": "cnc-access",
+      "prompt": "Preflight a CNC solid with deep narrow pockets, an undercut, and thin unsupported walls.",
+      "expected_output": "Review the actual machining route and accessible geometry.",
+      "files": [],
+      "assertions": [
+        "Inspect tool approach/reach, corners, setup and support risks.",
+        "Do not claim simulated CAM or machine-ready code from a solid."
+      ]
+    },
+    {
+      "id": "thread-derivatives",
+      "prompt": "The same functional thread needs a simple service-configured hole for one vendor and explicit geometry for printing.",
+      "expected_output": "Maintain shared intent with declared process derivatives.",
+      "files": [],
+      "assertions": [
+        "Verify each destination rule without a universal thread-representation recipe.",
+        "Preserve engagement, position, walls, and installation constraints."
+      ]
+    },
+    {
+      "id": "feature-coverage",
+      "prompt": "The specified edge treatment is continuous around a relieved surface, but only the peaks were clipped. Bounds and volume pass.",
+      "expected_output": "Verify physical shape across its full required coverage.",
+      "files": [],
+      "assertions": [
+        "Inspect sections through surface extremes and termination.",
+        "Do not accept isolated matching points or feature names as proof."
+      ]
+    },
+    {
+      "id": "reference-relationships",
+      "prompt": "A watertight reconstruction has the wrong opening planes and joint arrangement compared with the reference.",
+      "expected_output": "Separate geometry validity from reference fidelity.",
+      "files": [],
+      "assertions": [
+        "Compare adjacency, axes, openings, silhouette and negative space.",
+        "Do not pass merely because the solid is valid."
+      ]
+    },
+    {
+      "id": "delivered-identity",
+      "prompt": "The checked CAD is correct, but the delivered viewer loads another variant.",
+      "expected_output": "Verify artifact identity and separate the defect scope.",
+      "files": [],
+      "assertions": [
+        "Fail the viewer handoff identity.",
+        "Do not claim the underlying CAD is defective without evidence."
+      ]
+    },
+    {
+      "id": "near-miss-document",
+      "prompt": "Create a monochrome termination diagram and engineering BOM for this harness.",
+      "expected_output": "Recognize standalone technical documentation as outside fabrication-file scope.",
+      "files": [],
+      "assertions": [
+        "Do not activate this skill solely for drawing or BOM communication.",
+        "Do not add vendor or slicer gates."
+      ]
+    },
+    {
+      "id": "near-miss-digital",
+      "prompt": "Create a responsive SVG logo for a website.",
+      "expected_output": "Recognize digital-only graphics as outside physical production scope.",
+      "files": [],
+      "assertions": [
+        "Do not activate this skill.",
+        "Do not impose manufacturing checks."
+      ]
+    },
+    {
+      "id": "raw-solid-r",
+      "prompt": "Review only: the supplied candidate must be one solid, 20 mm outside diameter and 20 mm tall, with a centered 6 mm diameter blind bore 12 mm deep from the upper face, a continuous 1 mm x 45 degree chamfer around the entire outer upper edge, and a square lower outer edge. No producer is selected. Use the actual STEP file and return local geometry findings without modification or upload.",
+      "files": [
+        "evals/synthetic-fixtures/item-r.step"
+      ],
+      "expected_output": "Accept the specified local geometry without claiming vendor or physical validation.",
+      "assertions": [
+        "Measure one valid solid, 20 mm outer diameter/height and 6 mm bore with 12 mm depth.",
+        "Verify full 360-degree 1 mm chamfer coverage and square lower edge."
+      ]
+    },
+    {
+      "id": "raw-solid-k",
+      "prompt": "Review only: the supplied candidate must be one solid, 20 mm outside diameter and 20 mm tall, with a centered 6 mm diameter blind bore 12 mm deep from the upper face, a continuous 1 mm x 45 degree chamfer around the entire outer upper edge, and a square lower outer edge. No producer is selected. Use the actual STEP file and return local geometry findings without modification or upload.",
+      "files": [
+        "evals/synthetic-fixtures/item-k.step"
+      ],
+      "expected_output": "Reject the specification-compliant geometry handoff because the upper chamfer is incomplete.",
+      "assertions": [
+        "Identify a 180-degree chamfer covering only the positive-Y half.",
+        "Do not reject the valid body/bore merely because another feature fails, or pass from overall bounds."
+      ]
+    },
+    {
+      "id": "raw-project-h",
+      "prompt": "Review only: the supplied 3MF is submitted as a configured Bambu Studio project containing a 20 mm cube for a P1S, 0.4 mm nozzle, PLA and 0.2 mm layer height. Check the actual stored geometry and configuration claim. Do not print or upload.",
+      "files": [
+        "evals/synthetic-fixtures/item-h.3mf"
+      ],
+      "expected_output": "Accept locally valid cube geometry and reject the configured-project claim; report target-application and slice checks as unperformed.",
+      "assertions": [
+        "Measure a 20 mm cube with one shell, 8 vertices, 12 triangles, outward orientation and 8000 cubic millimeters volume.",
+        "Identify the absence of stored machine, nozzle, material and process settings."
+      ]
+    }
+  ],
+  "fixture_notes": "The files under evals/synthetic-fixtures are self-contained synthetic evaluation inputs, not production parts or manufacturing recommendations. Give an evaluator only the prompt, listed artifact, and skill instructions; keep expected_output and assertions hidden during a blinded run."
+}

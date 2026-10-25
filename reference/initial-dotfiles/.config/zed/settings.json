@@ -1,0 +1,92 @@
+{
+  "agent_font_size": 15,
+  "icon_theme": "Zed (Default)",
+  "edit_predictions": {
+    "provider": "zed",
+    "mode": "eager",
+    "disabled_globs": [
+      "**/.env*",
+      "**/.dev.vars",
+      "**/*.pem",
+      "**/*.key",
+      "**/*.cert",
+      "**/*.crt",
+      "**/secrets.yml"
+    ]
+  },
+  "show_whitespaces": "boundary",
+  "vim_mode": true,
+  "ui_font_family": "Berkeley Mono",
+  "buffer_font_family": "Berkeley Mono",
+  "ui_font_size": 16.0,
+  "buffer_font_size": 14,
+  "ui_font_weight": 500,
+  "soft_wrap": "editor_width",
+  "relative_line_numbers": "enabled",
+  "current_line_highlight": "gutter",
+  "inlay_hints": {
+    "show_type_hints": false,
+    "enabled": true
+  },
+  "vim": {
+    "use_system_clipboard": "always"
+  },
+  "theme": "orng Dark",
+  "languages": {
+    "Markdown-Inline": {
+      "enable_language_server": true
+    },
+    "Markdown": {
+      "soft_wrap": "editor_width",
+      "format_on_save": "off"
+    }
+  },
+  "git_panel": {
+    "dock": "right"
+  },
+  "project_panel": {
+    "dock": "right"
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "notification_panel": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "cursor_shape": "block",
+  "scrollbar": {
+    "show": "auto",
+    "git_diff": true,
+    "diagnostics": "all"
+  },
+  "agent": {
+    "tool_permissions": {
+      "default": "allow"
+    },
+    "inline_assistant_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5-latest"
+    },
+    "dock": "right",
+    "enabled": true,
+    "default_model": {
+      "effort": "medium",
+      "enable_thinking": true,
+      "provider": "zed.dev",
+      "model": "gpt-5.5"
+    }
+  },
+  "terminal": {
+    "font_family": "Berkeley Mono",
+    "blinking": "off",
+    "working_directory": "current_project_directory"
+  },
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000
+    }
+  }
+}

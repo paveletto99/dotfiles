@@ -1,0 +1,93 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+.vscode
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# OpenCode plugin dependencies and runtime data
+.opencode/node_modules/
+.opencode/bun.lock
+.opencode/worktrees/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Codex config and curated assets are tracked; runtime state/cache files are local-only.
+.codex/auth.json
+.codex/*
+!.codex/AGENTS.md
+!.codex/config.toml
+!.codex/bin/
+.codex/bin/*
+!.codex/bin/codex
+!.codex/bin/cloudflare-ai-gateway.js
+!.codex/rules/
+.codex/rules/*
+!.codex/rules/default.rules
+!.codex/themes/
+.codex/themes/*
+!.codex/themes/orng.tmTheme
+!.codex/pets/
+.codex/pets/*
+!.codex/pets/peewee/
+!.codex/pets/peewee/*
+!.codex/pets/maverick/
+!.codex/pets/maverick/*
+!.codex/pets/arm-commander/
+!.codex/pets/arm-commander/*
+!.codex/pets/sir-finley/
+!.codex/pets/sir-finley/pet.json
+!.codex/pets/sir-finley/spritesheet.png
+!.codex/pets/peon/
+!.codex/pets/peon/pet.json
+!.codex/pets/peon/spritesheet.png
+!.codex/pets/candle-kobold/
+!.codex/pets/candle-kobold/pet.json
+!.codex/pets/candle-kobold/spritesheet.png
+!.codex/pets/hogger/
+!.codex/pets/hogger/pet.json
+!.codex/pets/hogger/spritesheet.png
+!.codex/pets/tinker/
+!.codex/pets/tinker/pet.json
+!.codex/pets/tinker/spritesheet.png
+
+# Database tools config
+.config/configstore/
+.config/minipro-tui/
+.config/pgcli/*
+.config/planetscale/*
+
+# Atuin receipts
+.config/atuin/atuin-receipt.json
+
+# Zed prompt library database
+.config/zed/prompts/*
+
+# Zsh completion dump
+.zcompdump*
+.config/opencode/node_modules
+.config/opencode/service.json
+
+# Pi agent runtime sessions
+.pi/agent/auth.json
+.pi/agent/sessions/

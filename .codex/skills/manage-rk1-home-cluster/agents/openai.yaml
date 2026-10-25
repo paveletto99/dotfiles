@@ -1,0 +1,4 @@
+interface:
+  display_name: "Manage RK1 Home Cluster"
+  short_description: "Operate the SPIFFE-secured RK1 cluster"
+  default_prompt: "Use $manage-rk1-home-cluster to safely update this RK1 cluster."

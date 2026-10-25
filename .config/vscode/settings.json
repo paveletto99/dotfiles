@@ -1,0 +1,183 @@
+{
+  "terminal.integrated.fontFamily": "IoskeleyMono Nerd Font",
+	// editor
+	"dev.containers.dockerPath": "podman",
+	"editor.fontFamily": "IoskeleyMono Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+	"editor.cursorBlinking": "smooth",
+	"editor.cursorSmoothCaretAnimation": "on",
+	"editor.cursorStyle": "block",
+	"editor.fontLigatures": true,
+	"editor.mouseWheelZoom": true,
+	"editor.formatOnType": false,
+	"editor.letterSpacing": 0.5,
+	"editor.minimap.enabled": false,
+	"extensions.ignoreRecommendations": true,
+	"workbench.editor.pinnedTabsOnSeparateRow": true,
+	"workbench.iconTheme": "vscode-icons",
+	"diffEditor.ignoreTrimWhitespace": true,
+	// files
+	"files.autoSaveDelay": 1000,
+	"files.autoSave": "afterDelay",
+	"files.exclude": {
+		"**/.git": false,
+		"**/.DS_Store": true,
+		"**/node_modules": true,
+		"**/vendor": true,
+		"dist": true
+	},
+	// Rust
+	"rust-analyzer.cargo.features": "all",
+	"rust-analyzer.procMacro.enable": true,
+	"rust-analyzer.check.command": "clippy",
+	"rust-analyzer.inlayHints.chainingHints.enable": true,
+	"rust-analyzer.inlayHints.parameterHints.enable": true,
+	"editor.formatOnSave": true,
+	"[rust]": {
+		"editor.defaultFormatter": "rust-lang.rust-analyzer"
+	},
+	"rust-analyzer.diagnostics.enable": true,
+	// GO
+	"go.useLanguageServer": true,
+	"go.diagnostic.vulncheck": "Imports",
+	"go.testOnSave": false,
+	"go.lintOnSave": "package",
+	"go.formatTool": "goimports",
+	"go.testFlags": ["-v"],
+	// "go.autocompleteUnimportedPackages": true,
+	"go.toolsManagement.autoUpdate": true,
+	"[go]": {
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "never",
+			"source.fixAll": "explicit"
+		}
+	},
+	// python
+	"python.analysis.typeCheckingMode": "basic",
+	"python.analysis.autoSearchPaths": true,
+	"python.analysis.useLibraryCodeForTypes": true,
+	"python.analysis.diagnosticMode": "workspace",
+	"python.analysis.indexing": true,
+	"[python]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "charliermarsh.ruff",
+		"editor.codeActionsOnSave": {
+			"source.fixAll": "explicit",
+			"source.organizeImports": "explicit"
+		}
+	},
+	"notebook.formatOnSave.enabled": true,
+	"notebook.codeActionsOnSave": {
+		"notebook.source.fixAll": "explicit",
+		"notebook.source.organizeImports": "explicit"
+	},
+	// terraform
+	"terraform.experimentalFeatures.validateOnSave": false,
+	"terraform.languageServer.enable": true,
+	"[terraform]": {
+		"editor.defaultFormatter": "hashicorp.terraform",
+		"editor.formatOnSave": false,
+		"editor.codeActionsOnSave": {
+			"source.formatAll.terraform": "explicit"
+		}
+	},
+	"[terraform-vars]": {
+		"editor.defaultFormatter": "hashicorp.terraform",
+		"editor.formatOnSave": false,
+		"editor.codeActionsOnSave": {
+			"source.formatAll.terraform": "explicit"
+		}
+	},
+	// typescript
+	"typescript.tsserver.log": "off",
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	// formatter
+	"[html]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[markdown]": {
+		"editor.defaultFormatter": "GitHub.copilot"
+	},
+	"[yaml]": {
+		"editor.defaultFormatter": "GitHub.copilot"
+	},
+	"markdown.styles": [
+		"https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+	],
+	"biome.enabled": true,
+	// git
+	"git.confirmSync": false,
+	"git.autofetch": true,
+	"git.suggestSmartCommit": false,
+	"git.ignoreRebaseWarning": true,
+	"git.replaceTagsWhenPull": true,
+	"git.ignoreMissingGitWarning": true,
+	//copilot
+	"github.copilot.enable": {
+		"*": true,
+		"plaintext": true,
+		"markdown": true,
+		"scminput": false,
+		"rust": true,
+		"go": false,
+		"ignore": true
+	},
+	"github.copilot.selectedCompletionModel": "",
+	// todo-tree
+	"todo-tree.highlights.defaultHighlight": {
+		"icon": "alert",
+		"foreground": "#228b22",
+		"background": "#ffffff",
+		"opacity": 90,
+		"type": "whole-line",
+		"iconColour": "#ba55d3"
+	},
+	"todo-tree.highlights.enabled": true,
+	"todo-tree.highlights.customHighlight": {
+		"TODO": {
+			"icon": "check-circle-fill",
+			"gutterIcon": true,
+			"iconColour": "#87CEEB",
+			"background": "#87CEEB",
+			"foreground": "#00008B"
+		},
+		"FIXME": {
+			"foreground": "#000000",
+			"iconColour": "#ffff00",
+			"gutterIcon": true,
+			"background": "#ffff00"
+		},
+		"BUG": {
+			"foreground": "#ffffff",
+			"iconColour": "#ff0000",
+			"gutterIcon": true,
+			"background": "#ff0000"
+		}
+	},
+	"todo-tree.general.tags": [
+		"TODO",
+		"FIXME",
+		"COMPLETE",
+		"BUG"
+	],
+	"github.copilot.nextEditSuggestions.enabled": true,
+	"vsicons.dontShowNewVersionMessage": true,
+	"chat.tools.terminal.outputLocation": "chat",
+	"chat.viewSessions.orientation": "stacked",
+	"markdown-preview-github-styles.colorTheme": "light",
+	"markdown.preview.doubleClickToSwitchToEditor": false
+}
+

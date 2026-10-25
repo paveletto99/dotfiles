@@ -1,0 +1,16 @@
+.DS_Store
+__pycache__/
+*.pyc
+.cache/
+local/*
+!local/README.md
+# Credentials and runtime state are never managed by this repository.
+.env
+.env.*
+**/auth.json
+**/credentials.json
+**/node_modules/
+**/session*.json
+**/*.sqlite*
+**/*.sock
+.config/nvim/version

@@ -1,0 +1,210 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+model = "gpt-6.1-sol"
+
+# Approve for me: automatically review requests that need approval.
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
+default_permissions = ":workspace"
+web_search = "live"
+
+model_reasoning_effort = "high"
+model_verbosity = "low"
+service_tier = "default"
+
+[features]
+analytics_plan_history = true
+enable_request_compression = true
+# Use Guardian v2 with the runtime's current reviewer model and policy.
+guardian_approval = true
+guardianv2 = true
+memories = true
+prevent_idle_sleep = true
+
+[features.context_management]
+experimental_mode = true
+
+
+[projects."/Users/pobo/workspace"]
+trust_level = "trusted"
+
+[tui]
+theme = "orng"
+notifications = ["agent-turn-complete", "approval-requested"]
+show_tooltips = false
+status_line = ["model-with-reasoning", "context-remaining", "git-branch", "current-dir", "project-name", "pull-request-number", "branch-changes", "run-state", "approval-mode", "five-hour-limit", "codex-version", "task-progress"]
+terminal_title = ["spinner", "project", "git-branch"]
+
+[tui.keymap.global]
+open_transcript = "ctrl-t"
+
+[tui.keymap.composer]
+submit = "enter"
+
+[tui.keymap.editor]
+insert_newline = "shift-enter"
+
+[tui.keymap.chat]
+interrupt_turn = "f12"
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = false
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = false
+
+[plugins."chrome@openai-bundled"]
+enabled = true
+
+[plugins."computer-use@openai-bundled"]
+enabled = true
+
+[plugins."google-drive@openai-curated-remote"]
+enabled = true
+
+[plugins."expedia@openai-curated-remote"]
+enabled = false
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+# macOS browser bridge uses the service shipped with the installed ChatGPT app.
+[mcp_servers.node_repl]
+args = []
+command = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node_repl"
+startup_timeout_sec = 120
+
+# Mirrored from .config/opencode/opencode.jsonc.
+[mcp_servers."chrome-devtools"]
+command = "npx"
+args = ["-y", "chrome-devtools-mcp@latest"]
+enabled = false
+
+# The work-only cf-portal and google-workspace servers are injected by
+# .codex/bin/codex whenever that launcher selects the Cloudflare AI Gateway.
+[mcp_servers.playwright]
+command = "npx"
+args = ["@playwright/mcp@latest"]
+
+# [desktop]
+# conversationDetailMode = "STEPS_COMMANDS"
+# ambient-suggestions-enabled = true
+# appearanceLightCodeThemeId = "raycast"
+# appearanceDarkCodeThemeId = "raycast"
+# selected-avatar-id = "custom:peewee"
+# show-context-window-usage = true
+# followUpQueueMode = "steer"
+# composerEnterBehavior = "cmdIfMultiline"
+# dock-icon-preference = "app-default"
+# enabled-reasoning-efforts = ["low", "medium", "high", "xhigh", "ultra", "max"]
+# realtimeVoiceScreenContextEnabled = true
+# codex-micro-lighting-brightness = 30
+# codex-micro-agent-source = "custom"
+# dictationDictionary = ["WOT = wide open throttle", "Motronic (Bosch Motronic ECU)"]
+# preventSleepWhileRunning = true
+# keepRemoteControlAwakeWhilePluggedIn = true
+# external-agent-import-sync-enabled = true
+
+# [desktop.appearanceLightChromeTheme]
+# accent = "#ff6363"
+# contrast = 40
+# ink = "#030303"
+# opaqueWindows = false
+# surface = "#ffffff"
+#
+# [desktop.appearanceLightChromeTheme.fonts]
+# code = '"Jetbrains Mono"'
+# ui = "Inter"
+#
+# [desktop.appearanceLightChromeTheme.semanticColors]
+# diffAdded = "#006b4f"
+# diffRemoved = "#b12424"
+# skill = "#9a1b6e"
+#
+# [desktop.appearanceDarkChromeTheme]
+# accent = "#ff6363"
+# contrast = 60
+# ink = "#fefefe"
+# opaqueWindows = false
+# surface = "#101010"
+#
+# [desktop.appearanceDarkChromeTheme.fonts]
+# code = '"Jetbrains Mono"'
+# ui = "Inter"
+#
+# [desktop.appearanceDarkChromeTheme.semanticColors]
+# diffAdded = "#59d499"
+# diffRemoved = "#ff6363"
+# skill = "#cf2f98"
+#
+# [desktop.open-in-target-preferences]
+# global = "zed"
+#
+# [desktop.codex-micro-layout]
+# version = 1
+# encoderMode = "conversation-scroll"
+# voiceButtonMode = "realtime"
+#
+# [desktop.codex-micro-layout.slots]
+#
+# [desktop.codex-micro-layout.slots.ACT06]
+# keycapId = "FAST"
+#
+# [desktop.codex-micro-layout.slots.ACT07]
+# keycapId = "APPR"
+#
+# [desktop.codex-micro-layout.slots.ACT08]
+# keycapId = "REJ"
+#
+# [desktop.codex-micro-layout.slots.ACT09]
+# keycapId = "SPLIT"
+#
+# [desktop.codex-micro-layout.slots.ACT10_ACT11]
+# keycapId = "MIC"
+#
+# [desktop.codex-micro-layout.slots.ACT12]
+# keycapId = "BUG"
+#
+# [desktop.codex-micro-layout.slots.ACT12.action]
+# type = "skill"
+# skillName = "review-agent"
+# skillPath = "/Users/matt/repos/dotfiles/.codex/skills/.system/review-agent/SKILL.md"
+#
+# [desktop.codex-micro-layout.analogStick]
+#
+# [desktop.codex-micro-layout.analogStick.up]
+# type = "command"
+# commandId = "composer.togglePlanMode"
+#
+# [desktop.codex-micro-layout.analogStick.right]
+# type = "command"
+# commandId = "navigateForward"
+#
+# [desktop.codex-micro-layout.analogStick.down]
+# type = "command"
+# commandId = "toggleSidebar"
+#
+# [desktop.codex-micro-layout.analogStick.left]
+# type = "command"
+# commandId = "navigateBack"
+
+[notice]
+hide_rate_limit_model_nudge = true
+
+[shell_environment_policy]
+# Keep stale CI or shell tokens from overriding the authenticated gh keyring.
+exclude = ["GH_TOKEN", "GITHUB_TOKEN", "GH_ENTERPRISE_TOKEN", "GITHUB_ENTERPRISE_TOKEN"]
+
+[hooks.state]
+
+[hooks.state."browser@openai-bundled:plugin.json#hooks[0]:stop:0:0"]
+trusted_hash = "sha256:317a07045dfc95aef2e80c55428a2f817e2768be867e3b1ef29a73da8636ae7f"
+enabled = true
