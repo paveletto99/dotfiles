@@ -1,4 +1,3 @@
-# REVIEW: Optional GitHub CLI preferences; authentication stays in local hosts.yml/keychain.
 # The current version of the config schema
 version: 1
 # What protocol to use when performing git operations. Supported values: ssh, https

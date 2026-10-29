@@ -1,10 +1,6 @@
-// ____________________ REVIEW ____________________
-// Optional configuration; OpenCode is not installed or deployed by default.
-// Review inherited model limits, plugins, permissions and MCP servers before use.
 {
   "$schema": "https://opencode.ai/config.json",
   "model": "openai/gpt-5.6-sol",
-  "autoupdate": true,
   "plugin": [
     "opencode-cross-repo",
     "opencode-openai-codex-auth"

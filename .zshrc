@@ -156,57 +156,43 @@ if (( $+commands[podman] )); then
   alias docker=podman
   alias pdcl='podman image prune -a'
 fi
-# ALTERNATIVE: a real Docker CLI/runtime; remove the alias above if you choose it.
-# unalias docker
-# Optional incoming container shortcuts, aligned explicitly with Podman.
-# alias pd=podman
-# alias pdi='podman images -a'
-# alias pdc='podman ps -a'
-# REVIEW: the incoming dkc pipeline parsed docker ps text and mixed sudo/root state.
-# RECOMMENDED replacement for that intent: explicit Podman pruning when desired.
-# alias dkc='podman container prune'
-# NOT RECOMMENDED incoming pipeline; retained for comparison, never run at startup.
-# alias dkc="sudo docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs sudo docker rm"
-# REVIEW: retain Kubernetes' selected context instead of forcing a single kind file.
-# ALTERNATIVE: a host-specific kubeconfig, preferably in ~/.zshrc.local.
-# export KUBECONFIG="$HOME/.kube/kind-kubernetes-clusters-cluster-dev01.kubeconfig"
 
 # --- Optional incoming development helpers ------------------------------------
 # These are disabled choices, not additional startup dependencies.
-# alias gtvc='go test -v -race -cover .'
-# alias coverhtml='go test -coverprofile=coverage.out && go tool cover -html=coverage.out -o coverage.html'
-# sloc() { command find . -type f -name '*.go' -print0 | xargs -0 wc -l; }
+alias gtvc='go test -v -race -cover .'
+alias coverhtml='go test -coverprofile=coverage.out && go tool cover -html=coverage.out -o coverage.html'
+sloc() { command find . -type f -name '*.go' -print0 | xargs -0 wc -l; }
 # The incoming godoc helpers require a separately installed godoc executable.
-# alias todo='godoc -notes="TODO" .'
-# alias godoc-this='godoc -http=:6060'
+alias todo='godoc -notes="TODO" .'
+alias godoc-this='godoc -http=:6060'
 # Open http://localhost:6060/pkg separately; the original sequential alias blocked.
-# env-update() { exec zsh; }
-# mins-ago() { print -r -- "$(( $(date +%s) - 60 * ${1:-0} ))"; }
-# hours-ago() { print -r -- "$(( $(date +%s) - 3600 * ${1:-0} ))"; }
-# yesterday() { print -r -- "$(( $(date +%s) - 86400 ))"; }
-# time-at() {
-#   if [[ $OSTYPE == darwin* ]]; then
-#     command date -r "$1"
-#   else
-#     command date -d "@$1"
-#   fi
-# }
+env-update() { exec zsh; }
+mins-ago() { print -r -- "$(( $(date +%s) - 60 * ${1:-0} ))"; }
+hours-ago() { print -r -- "$(( $(date +%s) - 3600 * ${1:-0} ))"; }
+yesterday() { print -r -- "$(( $(date +%s) - 86400 ))"; }
+time-at() {
+  if [[ $OSTYPE == darwin* ]]; then
+    command date -r "$1"
+  else
+    command date -d "@$1"
+  fi
+}
 # REVIEW: native lazygit is simpler; use this opt-in helper only if you want exit cd.
 # The temporary file and command cat avoid the old shared-file/bat alias conflict.
-# lg() {
-#   local directory_file directory_name lazygit_status
-#   directory_file="$(mktemp)" || return
-#   LAZYGIT_NEW_DIR_FILE="$directory_file" command lazygit "$@"
-#   lazygit_status=$?
-#   if (( lazygit_status == 0 )) && [[ -s "$directory_file" ]]; then
-#     directory_name="$(command cat -- "$directory_file")"
-#     [[ ! -d "$directory_name" ]] || builtin cd -- "$directory_name"
-#   fi
-#   command rm -f -- "$directory_file"
-#   return "$lazygit_status"
-# }
+lg() {
+  local directory_file directory_name lazygit_status
+  directory_file="$(mktemp)" || return
+  LAZYGIT_NEW_DIR_FILE="$directory_file" command lazygit "$@"
+  lazygit_status=$?
+  if (( lazygit_status == 0 )) && [[ -s "$directory_file" ]]; then
+    directory_name="$(command cat -- "$directory_file")"
+    [[ ! -d "$directory_name" ]] || builtin cd -- "$directory_name"
+  fi
+  command rm -f -- "$directory_file"
+  return "$lazygit_status"
+}
 
-# REVIEW: Incoming Linux administration aliases do not belong in macOS defaults.
+# Incoming Linux administration aliases do not belong in macOS defaults.
 if [[ $OSTYPE == linux* ]]; then
   alias i='sudo apt-get install -y'
   alias up='sudo apt-get update && sudo apt-get upgrade -y'
@@ -220,16 +206,7 @@ if [[ $OSTYPE == darwin* ]]; then
     sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder
   }
 fi
-# REVIEW: legacy airport/private-framework commands are host/version-specific.
-# RECOMMENDED: leave this incoming MAC-changing helper disabled on this setup.
-if [[ $OSTYPE == darwin* ]]; then
-  alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
-  get_new_mac() {
-    sudo /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -z &&
-      sudo ifconfig en0 ether "a0$(openssl rand -hex 5 | sed 's/\(.\{2\}\)/:\1/g')" &&
-      networksetup -detectnewhardware
-  }
-fi
+
 # REVIEW: keep warning suppression off unless you deliberately want this behavior.
 # export NO_D1_WARNING=1
 # Incoming keychain commands referred to another host/user's files; keep them off.
