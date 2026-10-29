@@ -127,6 +127,27 @@ class DotfileDeploymentTests(unittest.TestCase):
         Path(operation["backup"]).rename(target)
         self.assertEqual(target.read_text(), "original")
 
+    def test_imported_themes_and_shared_skill_assets_use_canonical_files(self):
+        for relative in (".config/ghostty/themes/custom", ".codex/themes/custom.tmTheme"):
+            theme = self.root / relative
+            theme.parent.mkdir(parents=True, exist_ok=True)
+            theme.write_text("theme fixture")
+        shared = self.root / ".agents/assets/icon.svg"
+        shared.parent.mkdir(parents=True)
+        shared.write_text("shared asset")
+        icon = self.root / ".agents/skills/custom/icon.svg"
+        icon.symlink_to("../../assets/icon.svg")
+        optional = self.root / ".config/atuin/config.toml"
+        optional.parent.mkdir(parents=True)
+        optional.write_text("# optional")
+        self.assertEqual(self.deployment().deploy(), 0)
+        self.assertEqual((self.home / ".agents/skills/custom/icon.svg").resolve(), shared.resolve())
+        for relative in (".config/ghostty/themes/custom", ".codex/themes/custom.tmTheme"):
+            self.assertTrue((self.home / relative).is_symlink())
+            self.assertEqual((self.home / relative).resolve(), (self.root / relative).resolve())
+        self.assertFalse((self.home / ".config/atuin").exists())
+        self.assertEqual(self.deployment("check").deploy(), 0)
+
 
 if __name__ == "__main__":
     unittest.main()

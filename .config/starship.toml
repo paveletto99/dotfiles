@@ -1,5 +1,65 @@
-# Allow Git status checks in larger repositories to finish.
-command_timeout = 2000
+format = "$username$hostname:$directory$ruby$nodejs$cmd_duration$line_break$git_branch$git_status${custom.git_dirty}${custom.git_clean} $character"
+right_format = "$status"
+add_newline = false
 
-# ____________________ REVIEW ____________________
-# Retained 2000 ms timeout for large repositories; measure prompt latency before reducing.
+[username]
+show_always = true
+format = "[$user]($style)"
+style_user = "bold green"
+
+[hostname]
+ssh_only = false
+format = "[@$hostname]($style)"
+style = "bold green"
+
+[directory]
+format = "[$path]($style)"
+style = "bold blue"
+truncation_length = 8
+truncate_to_repo = false
+
+[ruby]
+format = " [$symbol($version)]($style)"
+style = "red"
+symbol = ""
+
+[nodejs]
+format = " [node $version]($style)"
+style = "green"
+
+[cmd_duration]
+min_time = 2000
+format = " [took $duration]($style)"
+style = "yellow"
+
+[git_branch]
+format = "[$branch]($style)"
+style = "blue"
+
+[git_status]
+format = "([$ahead_behind]($style))"
+style = "yellow"
+ahead = " ⇡${count}"
+behind = " ⇣${count}"
+diverged = " ⇕⇡${ahead_count}⇣${behind_count}"
+
+[custom.git_dirty]
+command = "printf '✗'"
+when = "git rev-parse --git-dir >/dev/null 2>&1 && test -n \"$(git status --porcelain 2>/dev/null)\""
+format = "[ $output]($style)"
+style = "red"
+
+[custom.git_clean]
+command = "printf '✔'"
+when = "git rev-parse --git-dir >/dev/null 2>&1 && test -z \"$(git status --porcelain 2>/dev/null)\""
+format = "[ $output]($style)"
+style = "green"
+
+[character]
+success_symbol = '[\$](bold)'
+error_symbol = '[\$](bold)'
+
+[status]
+disabled = false
+format = "[$status ↵]($style)"
+style = "red"

@@ -46,3 +46,6 @@
   - what changed
   - verification performed
   - important risks or follow-up items
+
+<!-- REVIEW: Incoming guidance allowed broader refactoring when it improves the solution.
+The active minimal-change and unrelated-refactor rules above remain authoritative. -->

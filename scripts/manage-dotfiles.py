@@ -81,6 +81,12 @@ def managed_dotfile_links(root, platform):
         for skill in sorted((root / folder).iterdir()):
             if skill.is_dir() and not skill.name.startswith("."):
                 links.append((f"{folder}/{skill.name}", f"{folder}/{skill.name}"))
+    for folder in (".config/ghostty/themes", ".config/zed/themes", ".codex/themes"):
+        directory = root / folder
+        if directory.is_dir():
+            for theme in sorted(directory.iterdir()):
+                if theme.is_file() and not theme.name.startswith("."):
+                    links.append((f"{folder}/{theme.name}", f"{folder}/{theme.name}"))
     if (root / "local/zshrc.local").is_file():
         links.append(("local/zshrc.local", ".zshrc.local"))
     return links

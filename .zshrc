@@ -1,18 +1,45 @@
-# Native Zsh + Starship. This repository owns portable shell configuration.
+# Native Zsh + Starship; portable settings belong in this repository.
+# Active settings preserve the current setup. REVIEW blocks are disabled choices.
+# RECOMMENDED explains the best fit for this setup; ALTERNATIVE is yours to enable.
+# Choose one option per conflict; do not uncomment every alternative at once.
+
+# --- PATH and language runtimes ------------------------------------------------
+# RECOMMENDED: keep inherited PATH entries, deduplicate, and use Homebrew's prefix.
+# This works with the macOS and Linux installers without hardcoding /opt/homebrew.
 unset ZSH ZSH_THEME
 typeset -U path fpath
-
-# Interactive non-login shells also need Homebrew and user-installed binaries.
 if (( ! $+commands[brew] )); then
   [[ ! -r "$HOME/.zprofile" ]] || source "$HOME/.zprofile"
 fi
 export GOPATH="${GOPATH:-$HOME/go}"
 export BUN_INSTALL="${BUN_INSTALL:-$HOME/.bun}"
 path=("$HOME/.local/bin" "$BUN_INSTALL/bin" "$HOME/.cargo/bin" "$GOPATH/bin" $path)
+
+
+# NVM if projects require different Node versions; choose one owner.
+export NVM_DIR="$HOME/.nvm"
+[[ ! -s "$NVM_DIR/nvm.sh" ]] || source "$NVM_DIR/nvm.sh"
+[[ ! -s "$NVM_DIR/bash_completion" ]] || source "$NVM_DIR/bash_completion"
+
+# --- Editor and command-line editing ------------------------------------------
+# RECOMMENDED: Neovim matches your submodule and works in terminal/SSH sessions.
 export EDITOR=nvim
 export VISUAL=nvim
-export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
+# REVIEW: Incoming Zed preference; choose it if a GUI is your primary editor.
+# ALTERNATIVE: macOS Zed Preview. Replace the two editor exports above if enabled.
+if [[ $OSTYPE == darwin* && -x "/Applications/Zed Preview.app/Contents/MacOS/cli" ]]; then
+  zed() { command "/Applications/Zed Preview.app/Contents/MacOS/cli" "$@"; }
+  export EDITOR='"/Applications/Zed Preview.app/Contents/MacOS/cli" --wait'
+  export VISUAL="$EDITOR"
+fi
 
+# REVIEW: Editing mode. The current default resolves to viins with EDITOR=nvim.
+# RECOMMENDED: vi mode fits your Neovim usage; an explicit binding is optional.
+bindkey -v
+KEYTIMEOUT=10
+
+# --- Native history and completion --------------------------------------------
+# RECOMMENDED: retain native history until you choose an additional history backend.
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=10000
@@ -28,17 +55,77 @@ compinit -d "$HOME/.zcompdump"
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[-_.]=* r:|=*'
 [[ ! -r "$BUN_INSTALL/_bun" ]] || source "$BUN_INSTALL/_bun"
+# REVIEW: Completion matching.
+# RECOMMENDED: current case-insensitive/flexible matching is convenient for daily use.
+# ALTERNATIVE: strict matching; replace the matcher-list above with this line.
+# zstyle ':completion:*' matcher-list ''
+# Incoming CASE_SENSITIVE/HYPHEN_INSENSITIVE variables only configure Oh My Zsh;
+# native Zsh uses the zstyle above, so those duplicate settings are not repeated.
 
+# REVIEW: Incoming fzf and Atuin integrations; packages alone do not bind keys.
+# RECOMMENDED first optional addition: fzf for interactive file/directory search.
+# Keep disabled until you choose its Ctrl-T / Alt-C / Ctrl-R bindings.
+# if (( $+commands[fzf] )); then
+#   if (( $+commands[fd] )); then
+#     export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+#     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+#     export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+#   fi
+#   export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+#   # Optional incoming preview; bat must be installed before choosing it.
+#   export FZF_CTRL_T_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || ls -la {}"'
+#   export FZF_ALT_C_OPTS='--preview "ls -la {}"'
+#   source <(fzf --zsh)
+# fi
+# ALTERNATIVE for an older fzf without --zsh: source its installed integration.
+# [[ ! -r "$HOME/.fzf.zsh" ]] || source "$HOME/.fzf.zsh"
+# ALTERNATIVE history backend: Atuin provides richer search with its own database.
+# If choosing both, initialize Atuin AFTER fzf so Atuin owns Ctrl-R.
+# if (( $+commands[atuin] )); then
+#   eval "$(atuin init zsh)"
+# fi
+# Sources: https://github.com/junegunn/fzf#setting-up-shell-integration
+#          https://github.com/atuinsh/atuin
+
+# --- Navigation and search ----------------------------------------------------
+# RECOMMENDED: keep native cd and one canonical ripgrep configuration.
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
+alias ..='cd ..'
+# REVIEW: Incoming RIPGREP_CONFIG_PATH=$HOME/.ripgreprc was a second config path.
+# Its optional --smart-case flag is now commented in .config/ripgrep/config.
+# ALTERNATIVE: physical paths instead of cd's normal logical/symlink behavior.
+# alias cd='cd -P'
+# RECOMMENDED optional navigation upgrade: zoxide's z/zi while retaining native cd.
+# if (( $+commands[zoxide] )); then
+#   eval "$(zoxide init zsh)"
+# fi
+# Source: https://github.com/ajeetdsouza/zoxide#installation
+# Optional try integration; prefer upstream init over a hardcoded Ruby wrapper.
+# if (( $+commands[try] )); then
+#   eval "$(try init "$HOME/Workspace/tries")"
+# fi
+# Optional WSL navigation paths from the incoming setup.
+# if [[ $OSTYPE == linux* && -n ${USERPROFILE:-} ]]; then
+#   cdpath+=("$USERPROFILE/Dropbox" "$USERPROFILE/Downloads")
+# fi
+
+# --- Personal and Git shortcuts ----------------------------------------------
+# RECOMMENDED: keep existing shortcuts to preserve your muscle memory.
 alias -g G='| rg'
 alias -g L='| less'
 alias h=history
 alias ll='ls -lah'
-alias ..='cd ..'
 alias myip='curl https://api.ipify.org; echo'
-# ____________________ REVIEW ____________________
-# This subnet matches the current home LAN; change it before using elsewhere.
 alias lips='nmap -sn 192.168.1.0/24'
 alias bup='brew upgrade'
+# REVIEW: Global G/L expand in argument positions too; quote literal G/L as needed.
+# ALTERNATIVE: remove these global shortcuts if that behavior is surprising.
+# unalias -g G L
+# REVIEW: ll with human-readable sizes (current) versus raw byte counts (incoming).
+# alias ll='ls -la'
+# RECOMMENDED: current HTTPS myip endpoint; the incoming HTTP endpoint is optional.
+# alias myip='curl http://ipecho.net/plain; echo'
+# REVIEW: lips scans the current home LAN. Change its subnet for another network.
 
 alias g=git
 alias ga='git add'
@@ -52,8 +139,43 @@ alias gd='git diff'
 alias gl='git pull'
 alias gp='git push'
 alias gst='git status'
+# REVIEW: gl has two conflicting meanings.
+# RECOMMENDED: keep gl=pull for compatibility and choose a distinct log shortcut.
+# alias glog='git --no-pager log --oneline --decorate -n 10'
+# ALTERNATIVE: incoming gl=log; replace gl above and use gpl for pull.
+# alias gl='git --no-pager log --oneline --decorate -n 10'
+# alias gpl='git pull'
+# Incoming unalias gb conflicts with the explicit branch shortcut; keep it disabled.
+# unalias gb
 
+# Optional nonconflicting incoming shortcuts; enable individually if useful.
+# alias zshconfig='$EDITOR ~/.zshrc'
+# alias lsa='ls -alh'
+# alias sl=ls
+# alias less='less -X'
+# alias unixts='date +%s'
+# alias iso8601="date -u +'%Y-%m-%dT%H:%M:%SZ'"
+# alias nv=nvim
+# alias codexr='codex resume'
+# alias codexa='codex resume --last'
+# alias oc='opencode --continue'
+# alias ocr='opencode run'
+# alias ocs='opencode "$HOME/Workspace/scratch"'
+# alias k=kubectl
+# alias kgs='kubectl get svc -A -o wide'
+# alias kgp='kubectl get pod -A --show-labels'
+# RECOMMENDED Python shorthand: follow the installed Python rather than pinning 3.8.
+# alias py=python3
+# ALTERNATIVE: only if this legacy interpreter is deliberately installed.
+# alias py=python3.8
+
+# --- Command replacements and containers --------------------------------------
+# RECOMMENDED: btop is installed/configured; retain it as your top replacement.
 (( ! $+commands[btop] )) || alias top=btop
+# ALTERNATIVE: bottom's executable is btm, not the old alias target bottom.
+# (( ! $+commands[btm] )) || alias top=btm
+
+# RECOMMENDED: retain your bat/dust shortcuts, with rcat for native cat behavior.
 if (( $+commands[bat] )); then
   alias cat=bat
   alias rcat='/bin/cat'
@@ -61,31 +183,179 @@ if (( $+commands[bat] )); then
   export MANROFFOPT=-c
 fi
 (( ! $+commands[dust] )) || alias du=dust
-# ____________________ REVIEW ____________________
-# exa, bottom, fd, procs and broot aliases were removed. Native ls/find/ps/tree
-# remain available; absent replacements are not installed automatically.
+# ALTERNATIVE: native cat/du if you prefer their exact flags and output.
+# unalias cat du
+# unset MANPAGER MANROFFOPT
+# REVIEW: native ls/find/ps/tree versus incoming replacements.
+# RECOMMENDED: preserve native command names; use separate shortcuts for new tools.
+# alias ff=fd
+# ALTERNATIVE: global replacements change flags/output; choose each deliberately.
+# alias ls=exa
+# alias find=fd
+# alias ps=procs
+# alias tree=broot
+# ALTERNATIVE process search shortcut; this is grep-based, not an exact PID lookup.
+# alias pid='ps -A -e -l | grep'
+
+# RECOMMENDED: Podman matches Brewfile and your current VM/connection setup.
 if (( $+commands[podman] )); then
   alias docker=podman
   alias pdcl='podman image prune -a'
 fi
-# REVIEW: The old dkc alias mixed sudo/docker and parsed human-readable output.
-# It remains in reference/initial-dotfiles; use podman container prune deliberately.
+# ALTERNATIVE: a real Docker CLI/runtime; remove the alias above if you choose it.
+# unalias docker
+# Optional incoming container shortcuts, aligned explicitly with Podman.
+# alias pd=podman
+# alias pdi='podman images -a'
+# alias pdc='podman ps -a'
+# REVIEW: the incoming dkc pipeline parsed docker ps text and mixed sudo/root state.
+# RECOMMENDED replacement for that intent: explicit Podman pruning when desired.
+# alias dkc='podman container prune'
+# NOT RECOMMENDED incoming pipeline; retained for comparison, never run at startup.
+# alias dkc="sudo docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs sudo docker rm"
+# REVIEW: retain Kubernetes' selected context instead of forcing a single kind file.
+# ALTERNATIVE: a host-specific kubeconfig, preferably in ~/.zshrc.local.
+# export KUBECONFIG="$HOME/.kube/kind-kubernetes-clusters-cluster-dev01.kubeconfig"
 
-# Host-specific endpoints belong to the ignored local directory in dotfiles.
+# --- Optional incoming development helpers ------------------------------------
+# These are disabled choices, not additional startup dependencies.
+# alias gtvc='go test -v -race -cover .'
+# alias coverhtml='go test -coverprofile=coverage.out && go tool cover -html=coverage.out -o coverage.html'
+# sloc() { command find . -type f -name '*.go' -print0 | xargs -0 wc -l; }
+# The incoming godoc helpers require a separately installed godoc executable.
+# alias todo='godoc -notes="TODO" .'
+# alias godoc-this='godoc -http=:6060'
+# Open http://localhost:6060/pkg separately; the original sequential alias blocked.
+# env-update() { exec zsh; }
+# mins-ago() { print -r -- "$(( $(date +%s) - 60 * ${1:-0} ))"; }
+# hours-ago() { print -r -- "$(( $(date +%s) - 3600 * ${1:-0} ))"; }
+# yesterday() { print -r -- "$(( $(date +%s) - 86400 ))"; }
+# time-at() {
+#   if [[ $OSTYPE == darwin* ]]; then
+#     command date -r "$1"
+#   else
+#     command date -d "@$1"
+#   fi
+# }
+# REVIEW: native lazygit is simpler; use this opt-in helper only if you want exit cd.
+# The temporary file and command cat avoid the old shared-file/bat alias conflict.
+# lg() {
+#   local directory_file directory_name lazygit_status
+#   directory_file="$(mktemp)" || return
+#   LAZYGIT_NEW_DIR_FILE="$directory_file" command lazygit "$@"
+#   lazygit_status=$?
+#   if (( lazygit_status == 0 )) && [[ -s "$directory_file" ]]; then
+#     directory_name="$(command cat -- "$directory_file")"
+#     [[ ! -d "$directory_name" ]] || builtin cd -- "$directory_name"
+#   fi
+#   command rm -f -- "$directory_file"
+#   return "$lazygit_status"
+# }
+
+# REVIEW: Incoming Linux administration aliases do not belong in macOS defaults.
+# if [[ $OSTYPE == linux* ]]; then
+#   alias i='sudo apt-get install -y'
+#   alias up='sudo apt-get update && sudo apt-get upgrade -y'
+# fi
+# NOT RECOMMENDED: the incoming ownership wrapper is incomplete/broad; use an
+# explicit chown command on a chosen path instead of enabling it as written.
+# alias my="'sudo chown -R $(id -u)'"
+# ALTERNATIVE macOS DNS helper; it runs only when explicitly invoked, not on startup.
+# if [[ $OSTYPE == darwin* ]]; then
+#   flush-dns() {
+#     sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder
+#   }
+# fi
+# REVIEW: legacy airport/private-framework commands are host/version-specific.
+# RECOMMENDED: leave this incoming MAC-changing helper disabled on this setup.
+# if [[ $OSTYPE == darwin* ]]; then
+#   alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
+#   get_new_mac() {
+#     sudo /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -z &&
+#       sudo ifconfig en0 ether "a0$(openssl rand -hex 5 | sed 's/\(.\{2\}\)/:\1/g')" &&
+#       networksetup -detectnewhardware
+#   }
+# fi
+# REVIEW: keep warning suppression off unless you deliberately want this behavior.
+# export NO_D1_WARNING=1
+# Incoming keychain commands referred to another host/user's files; keep them off.
+# /usr/bin/keychain --nogui "$HOME/.ssh/dev_debian_wsl_doit" > /dev/null 2>&1
+# [[ ! -r "$HOME/.keychain/NBGIOVANNINI-sh" ]] || source "$HOME/.keychain/NBGIOVANNINI-sh"
+
+# --- Host overrides, prompt and interactive plugins ----------------------------
+# RECOMMENDED: keep machine endpoints outside portable config; one host override.
 [[ ! -r "$HOME/.zshrc.local" ]] || source "$HOME/.zshrc.local"
+
+# RECOMMENDED: Starship is already installed/configured and fits your current setup.
+# https://starship.rs/guide/
 if [[ ${TERM:-dumb} != dumb ]] && (( $+commands[starship] )); then
   eval "$(starship init zsh)"
 fi
+# REVIEW: Prompt alternatives. Disable Starship before selecting another prompt.
+# ALTERNATIVE: native Zsh prompt, minimal dependencies but no Git/runtime segments.
+# PROMPT='%F{blue}%~%f %# '
+# ALTERNATIVE: incoming Oh My Zsh themes, only if you want its framework/plugins.
+# If chosen, also disable native compinit/standalone plugin loading to avoid doubles.
+# export ZSH="$HOME/.oh-my-zsh"
+# ZSH_THEME=robbyrussell
+# plugins=(colored-man-pages command-not-found gem git github zsh-autosuggestions zsh-syntax-highlighting)
+# zstyle ':omz:alpha:lib:git' async-prompt yes
+# CASE_SENSITIVE=false
+# HYPHEN_INSENSITIVE=true
+# [[ ! -r "$ZSH/oh-my-zsh.sh" ]] || source "$ZSH/oh-my-zsh.sh"
+# ALTERNATIVE within Oh My Zsh: use Powerlevel10k instead of robbyrussell.
+# Set ZSH_THEME before sourcing Oh My Zsh, not after it.
+# ZSH_THEME=powerlevel10k/powerlevel10k
+# [[ ! -r "$HOME/.p10k.zsh" ]] || source "$HOME/.p10k.zsh"
+# Incoming Powerlevel10k instant-prompt optimization belongs at the TOP of this file
+# if you choose that theme. It is not used with the active Starship setup.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+# Incoming kube-aliases/kubectl plugins are another optional OMZ plugin selection.
+# plugins=(git zsh-autosuggestions kube-aliases kubectl)
+# ALTERNATIVE custom OMZ prompt with the incoming vi-mode indicator.
+# Use this only after OMZ supplies git_prompt_info/colors; do not mix with Starship.
+# ZSH_THEME_GIT_PROMPT_PREFIX=' %F{208}('
+# ZSH_THEME_GIT_PROMPT_SUFFIX=')%f'
+# ZSH_THEME_GIT_PROMPT_DIRTY=' ✗'
+# ZSH_THEME_GIT_PROMPT_CLEAN=' ✓'
+# NEWLINE=$'\n'
+# function zle-line-init zle-keymap-select {
+#   case $KEYMAP in
+#     vicmd) VI_MODE='%F{white}nrm%f' ;;
+#     viins|main) VI_MODE='%F{yellow}ins%f' ;;
+#   esac
+#   zle reset-prompt
+# }
+# zle -N zle-line-init
+# zle -N zle-keymap-select
+# VI_MODE='%F{yellow}ins%f'
+# export PROMPT='%F{green}%p%F{blue}%~$(git_prompt_info)%f${NEWLINE}${ret_status}${VI_MODE} ➜ '
+
+# RECOMMENDED: keep these standalone plugins with native Zsh + Starship.
+# Any optional fzf/Atuin/ZLE initialization must remain ABOVE syntax highlighting.
 if [[ -n "$_dotfiles_brew_prefix" ]]; then
   [[ ! -r "$_dotfiles_brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] ||
     source "$_dotfiles_brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-  # Syntax highlighting is the last interactive plugin loaded.
   [[ ! -r "$_dotfiles_brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] ||
     source "$_dotfiles_brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 unset _dotfiles_brew_prefix
 
-# Bypass once with HERDR_AUTO_START=0 zsh; never attach from scripts or nested panes.
+# --- Terminal manager: choose ONE automatic launcher ---------------------------
+# RECOMMENDED: Herdr matches your current agent workflow; keep the active block.
+# ALTERNATIVE: tmux if traditional terminal sessions matter more than Herdr's UI.
+# Disable the Herdr block before enabling tmux; do not nest automatic launchers.
+# if [[ -o interactive && -t 0 && -t 1 && -z ${TMUX:-} && ${TERM_PROGRAM:-} == ghostty ]] && (( $+commands[tmux] )); then
+#   exec tmux new-session -A -s main
+# fi
+# ALTERNATIVE: Zellij if you prefer its terminal/pane workflow. Disable Herdr first.
+# export ZELLIJ_CONFIG_DIR="$HOME/.config/zellij"
+# if [[ -o interactive && -t 0 && -t 1 && -z ${ZELLIJ:-} ]] && (( $+commands[zellij] )); then
+#   eval "$(zellij setup --generate-auto-start zsh)"
+# fi
+# Bypass the active launcher once with HERDR_AUTO_START=0 zsh.
 if [[ -o interactive && -t 0 && -t 1 && -z ${HERDR_ENV:-} && ${HERDR_AUTO_START:-1} != 0 ]] && (( $+commands[herdr] )); then
   exec herdr
 fi

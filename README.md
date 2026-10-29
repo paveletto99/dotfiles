@@ -26,6 +26,12 @@ shared CLI tools come from Linuxbrew. It does not start container services.
 macOS applications are installed only if their existing app bundles are absent.
 GUI editor installation on Linux is manual; their configuration is still managed.
 
+Brewfile merges the current and incoming tools into shared CLI groups and macOS
+application/cross-compiler groups. Third-party taps are declared explicitly and
+require a reviewed trust decision on a fresh host. OrbStack and the Terraform
+version migration remain commented alternatives. Rust, Bun, Herdr and Ioskeley
+retain their existing installer paths rather than duplicate Brew entries.
+
 The installer installs missing packages without requesting blanket upgrades,
 initializes pinned submodules, installs the font and deploys explicit file links.
 It does not change the login shell, create SSH keys, configure signing, provision
@@ -52,8 +58,15 @@ It intentionally reports a different submodule commit as drift.
 - `local/`: ignored host settings, loaded after the shared configuration.
 - `Brewfile`: intended package installation; `docs/brew-inventory.md`: complete
   observed package/version inventory, including dependencies and external tools.
-- `reference/`: inactive original repo and historical home-lab files. Nothing here
-  is deployed or executed by the installer.
+- Atuin, OpenCode, GitHub CLI and Zellij configuration lives in its standard
+  `.config/` directory. Their packages are included in Brewfile; their optional
+  configuration and shell integrations remain disabled until reviewed.
+
+Each configuration has one canonical location. Conflicting incoming settings are
+commented under `REVIEW: Incoming` in that file; current settings remain active.
+Imported skills and themes use their standard directories. The two drawing skills
+share one icon through relative symlinks. Original archives and duplicate
+installers have been removed; earlier content remains available in Git history.
 
 Shell configuration retains existing history, completion, Git shortcuts, bat,
 dust, autosuggestions and syntax highlighting. `top` uses installed btop. Native
@@ -144,10 +157,10 @@ Never restore an entire `.codex` or `.config` directory over live runtime state.
 [Review notes](docs/review.md) list outstanding choices. Search active files for
 `REVIEW:` to find marked sections. The [configuration map](docs/configuration-map.md)
 lists managed sources, local exceptions and tools that use upstream defaults.
-Original repo content is preserved under
-`reference/initial-dotfiles`, and the former `home-lab/envs/dev-setup` lives under
-`reference/home-lab-dev-setup`. Historical installers are not executable and must
-not be run through Bash either. home-lab retains a migration pointer.
+The former home-lab setup is consolidated here, and home-lab retains a migration
+pointer. `install.sh` is the only installation entry point. Imported settings for
+other fonts, prompts, signing policies and optional tools remain commented for
+review instead of providing a second active configuration.
 
 ## Verification
 

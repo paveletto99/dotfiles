@@ -9,12 +9,12 @@ The complete installed package list is in [brew-inventory.md](brew-inventory.md)
 | Zsh | Root .zshenv, .zprofile, .zshrc | Individual links in the home directory; native completion and Homebrew plugins |
 | Starship | .config/starship.toml | ~/.config/starship.toml |
 | Git, delta | .gitconfig, .config/git/ignore | Global Git settings and global excludes, distinct from this repo's .gitignore |
-| Ghostty | .config/ghostty/config.ghostty | XDG config; legacy/macOS override files backed up |
+| Ghostty | .config/ghostty/config.ghostty and .config/ghostty/themes | XDG config and individual theme links; legacy/macOS override files backed up |
 | Neovim | .config/nvim submodule | Whole config-directory link; submodule retains its own history and local changes |
 | Zed | .config/zed/settings.json | ~/.config/zed/settings.json; custom theme directory currently empty |
 | VS Code Insiders | .config/vscode/settings.json | Platform-specific User/settings.json |
 | Herdr | .config/herdr/config.toml | Only static config; sockets, sessions, logs and generated Codex integration stay local |
-| Codex | .codex/config.toml plus ignored local/codex.toml | Rendered ~/.codex/config.toml; --check compares parsed settings |
+| Codex | .codex/config.toml plus ignored local/codex.toml; .codex/themes | Rendered ~/.codex/config.toml and individual theme links; --check compares parsed settings |
 | Codex instructions | .codex/AGENTS.md | Individual home link |
 | Custom skills | .agents/skills and .codex/skills | Individual skill-directory links; bundled/system/plugin skills stay local |
 | ripgrep | .config/ripgrep/config | RIPGREP_CONFIG_PATH set in .zshrc |
@@ -24,6 +24,8 @@ The complete installed package list is in [brew-inventory.md](brew-inventory.md)
 | Ioskeley font | scripts/install-ioskeley-font.py | User font directory plus release URL and file-digest receipt |
 | age, sops | Existing local identity storage and project rules | Private keys remain in place; project .sops.yaml files belong to their projects |
 | Packer, Terraform, Ansible | Their project repositories | Runtime caches and checkpoint state remain local; tool-source questions are marked REVIEW |
+| Atuin, OpenCode, GitHub CLI, Zellij | .config/atuin, .config/opencode, .config/gh/config.yml, .config/zellij/config.kdl | Packages are in Brewfile; optional configuration remains available for manual adoption and is not linked by default |
+| Optional SSH preferences | .ssh/config | Incoming settings are fully commented and not deployed |
 
 REVIEW: The imported custom cluster skill's
 `.codex/skills/manage-rk1-home-cluster/references/cluster-reference.md` contains
@@ -33,4 +35,7 @@ No cluster provisioning or infrastructure changes are performed by dotfiles.
 SSH configuration, credentials, NATS contexts, Podman machine state, histories,
 editor conversations, auth stores, plugin caches and private age identities are
 deliberately outside managed configuration. Historical SSH/editor work settings
-from home-lab remain inactive under reference/ for manual review.
+from home-lab are commented in the canonical SSH/editor files for manual review.
+Conflicting incoming settings in other formats follow the same `REVIEW: Incoming`
+convention. Replaced installers and configuration copies are available in Git
+history rather than a second configuration tree.

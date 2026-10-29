@@ -176,3 +176,19 @@
     }
   }
 }
+
+// ____________________ REVIEW: Incoming ____________________
+// Conflicting or additional imported editor settings.
+// Disabled alternatives; the active settings above remain authoritative.
+// {
+//   "agent_font_size": 15,
+//   "ui_font_family": "Berkeley Mono",
+//   "buffer_font_family": "Berkeley Mono",
+//   "theme": "orng Dark",
+//   "notification_panel": {
+//     "dock": "right"
+//   },
+//   "terminal": {
+//     "font_family": "Berkeley Mono"
+//   }
+// }

@@ -1,0 +1,5 @@
+enter_accept = true
+keymap_mode = "auto"
+
+[sync]
+records = true

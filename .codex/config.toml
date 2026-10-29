@@ -1,21 +1,72 @@
-# Portable live Codex preferences. Host integrations are in ignored local/codex.toml.
-# ____________________ REVIEW ____________________
-# The existing approval/sandbox policies are retained; review before deploying to another host.
-"personality" = "pragmatic"
-"approval_policy" = "never"
-"web_search" = "cached"
-"file_opener" = "vscode"
-"approvals_reviewer" = "user"
-"plan_mode_reasoning_effort" = "high"
-"model" = "gpt-6.1-sol"
-"model_reasoning_effort" = "high"
-"sandbox_mode" = "danger-full-access"
+"approval_policy" = "on-request"
+"approvals_reviewer" = "auto_review"
+"default_permissions" = ":workspace"
+"web_search" = "live"
+"model_verbosity" = "low"
+"service_tier" = "default"
 
 ["features"]
-"hooks" = true
-"multi_agent" = true
-"js_repl" = false
+"analytics_plan_history" = true
+"enable_request_compression" = true
+"guardian_approval" = true
+"guardianv2" = true
+"memories" = true
+"prevent_idle_sleep" = true
+
+["features"."context_management"]
+"experimental_mode" = true
 
 ["tui"]
-"status_line" = ["model-with-reasoning", "current-dir", "thread-name", "five-hour-limit", "weekly-limit"]
-"status_line_use_colors" = true
+"theme" = "orng"
+"notifications" = ["agent-turn-complete", "approval-requested"]
+"show_tooltips" = false
+"status_line" = ["model-with-reasoning", "context-remaining", "git-branch", "current-dir", "project-name", "pull-request-number", "branch-changes", "run-state", "approval-mode", "five-hour-limit", "codex-version", "task-progress"]
+"terminal_title" = ["spinner", "project", "git-branch"]
+
+["tui"."keymap"]
+
+["tui"."keymap"."global"]
+"open_transcript" = "ctrl-t"
+
+["tui"."keymap"."composer"]
+"submit" = "enter"
+
+["tui"."keymap"."editor"]
+"insert_newline" = "shift-enter"
+
+["tui"."keymap"."chat"]
+"interrupt_turn" = "f12"
+
+["plugins"]
+
+["plugins"."presentations@openai-primary-runtime"]
+"enabled" = false
+
+["plugins"."template-creator@openai-primary-runtime"]
+"enabled" = false
+
+["plugins"."chrome@openai-bundled"]
+"enabled" = true
+
+["plugins"."google-drive@openai-curated-remote"]
+"enabled" = true
+
+["plugins"."expedia@openai-curated-remote"]
+"enabled" = false
+
+["mcp_servers"]
+
+["mcp_servers"."chrome-devtools"]
+"command" = "npx"
+"args" = ["-y", "chrome-devtools-mcp@latest"]
+"enabled" = false
+
+["mcp_servers"."playwright"]
+"command" = "npx"
+"args" = ["@playwright/mcp@latest"]
+
+["notice"]
+"hide_rate_limit_model_nudge" = true
+
+["shell_environment_policy"]
+"exclude" = ["GH_TOKEN", "GITHUB_TOKEN", "GH_ENTERPRISE_TOKEN", "GITHUB_ENTERPRISE_TOKEN"]

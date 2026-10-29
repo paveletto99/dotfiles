@@ -181,3 +181,150 @@
 	"markdown.preview.doubleClickToSwitchToEditor": false
 }
 
+// ____________________ REVIEW: Incoming ____________________
+// Conflicting or additional imported editor settings.
+// Disabled alternatives; the active settings above remain authoritative.
+// {
+//   "editor.autoIndent": "full",
+//   "editor.codeActionsOnSave": {
+//     "source.fixAll.eslint": "explicit",
+//     "source.organizeImports": "explicit",
+//     "quickFix": "explicit"
+//   },
+//   "editor.codeLens": true,
+//   "editor.fontFamily": "DepartureMono Nerd Font, FiraCode Nerd Font Mono, Hack, Hasklig, Consolas, 'Courier New', monospace",
+//   "editor.fontSize": 16,
+//   "editor.formatOnPaste": false,
+//   "editor.lineHeight": 22,
+//   "editor.renderWhitespace": "none",
+//   "editor.semanticHighlighting.enabled": true,
+//   "editor.tabCompletion": "on",
+//   "editor.suggestSelection": "first",
+//   "editor.tabSize": 2,
+//   "editor.wordWrap": "off",
+//   "editor.accessibilitySupport": "off",
+//   "editor.columnSelection": false,
+//   "eslint.validate": [
+//     "typescript"
+//   ],
+//   "explorer.confirmDragAndDrop": false,
+//   "files.exclude": {
+//     "**/.git": true,
+//     "**/*.js": {
+//       "when": "$(basename).ts"
+//     },
+//     "**/*.js.map": {
+//       "when": "$(basename)"
+//     },
+//     "node_modules": true,
+//     "**/dist": true
+//   },
+//   "files.hotExit": "onExit",
+//   "files.trimTrailingWhitespace": true,
+//   "go.languageServerExperimentalFeatures": {
+//     "diagnostics": true
+//   },
+//   "gitlens.views.repositories.includeWorkingTree": true,
+//   "gitlens.gitCommands.skipConfirmations": [
+//     "fetch:command",
+//     "stash-push:command",
+//     "switch:command",
+//     "branch-create:command"
+//   ],
+//   "[azure-pipelines]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "[helm]": {
+//     "editor.formatOnSave": false
+//   },
+//   "[html]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "[javascript]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "[json]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "[jsonc]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "[markdown]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode",
+//     "editor.formatOnSave": false
+//   },
+//   "rust.full_docs": true,
+//   "rust.features": [],
+//   "rust.jobs": 4,
+//   "rust-analyzer.checkOnSave.command": "clippy",
+//   "rust-analyzer.cargo.autoreload": true,
+//   "[rust]": {
+//     "editor.codeActionsOnSave": {
+//       "source.organizeImports": "explicit",
+//       "quickFix": "explicit",
+//       "source.fixAll": "explicit"
+//     }
+//   },
+//   "security.workspace.trust.untrustedFiles": "open",
+//   "[typescript]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "workbench.iconTheme": "material-icon-theme",
+//   "workbench.editor.highlightModifiedTabs": true,
+//   "[yaml]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "omnisharp.enableAsyncCompletion": true,
+//   "[typescriptreact]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "sonarlint.connectedMode.connections.sonarqube": [
+//     {
+//       "serverUrl": "https://sonarqube.fmcgds-np.com",
+//       "connectionId": "vs-code"
+//     }
+//   ],
+//   "sonarlint.rules": {
+//     "typescript:S6544": {
+//       "level": "off"
+//     },
+//     "typescript:S6759": {
+//       "level": "off"
+//     },
+//     "go:S100": {
+//       "level": "off"
+//     }
+//   },
+//   "typescript.updateImportsOnFileMove.enabled": "never",
+//   "window.density.editorTabHeight": "default",
+//   "[terraform][terraform-vars]": {
+//     "editor.codeActionsOnSave": {
+//       "source.formatAll.terraform": "explicit"
+//     }
+//   },
+//   "remote.SSH.remotePlatform": {
+//     "default": "linux"
+//   },
+//   "hediet.vscode-drawio.resizeImages": null,
+//   "git.openRepositoryInParentFolders": "always",
+//   "zig.zls.enabled": "on",
+//   "[zig]": {
+//     "editor.formatOnSave": true,
+//     "editor.suggest.insertMode": "replace",
+//     "editor.stickyScroll.defaultModel": "foldingProviderModel",
+//     "editor.codeActionsOnSave": {}
+//   },
+//   "editor.semanticTokenColorCustomizations": {
+//     "rules": {
+//       "*.deprecated": {
+//         "strikethrough": true
+//       }
+//     }
+//   },
+//   "github.copilot.enable": {
+//     "plaintext": false,
+//     "markdown": false
+//   },
+//   "workbench.colorCustomizations": {},
+//   "github.copilot.selectedCompletionModel": "gpt-4o-copilot"
+// }

@@ -1,5 +1,6 @@
- # Search hidden files / directories
+# Search hidden files while skipping very large files.
 --hidden
-
-# (optional) still skip really huge binary blobs
 --max-filesize=5M
+
+# REVIEW: Incoming search behavior; leave commented to retain current case sensitivity.
+# --smart-case

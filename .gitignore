@@ -14,3 +14,20 @@ local/*
 **/*.sqlite*
 **/*.sock
 .config/nvim/version
+# Optional tool configuration is versioned; authentication/runtime files stay local.
+.config/gh/hosts.yml
+.config/chipdesk/state.json
+.config/atuin/atuin-receipt.json
+.config/opencode/service.json
+.config/opencode/worktrees/
+.config/zed/prompts/
+.codex/auth.json
+.codex/sessions/
+.codex/archived_sessions/
+.codex/plugins/
+.codex/cache/
+.codex/.tmp/
+.codex/skills/.system/
+.zcompdump*
+.ssh/*
+!.ssh/config
