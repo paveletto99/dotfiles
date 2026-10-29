@@ -18,11 +18,6 @@ style = "bold blue"
 truncation_length = 8
 truncate_to_repo = false
 
-[ruby]
-format = " [$symbol($version)]($style)"
-style = "red"
-symbol = ""
-
 [nodejs]
 format = " [node $version]($style)"
 style = "green"

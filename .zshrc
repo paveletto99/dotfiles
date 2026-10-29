@@ -1,10 +1,7 @@
 # Native Zsh + Starship; portable settings belong in this repository.
-# Active settings preserve the current setup. REVIEW blocks are disabled choices.
-# RECOMMENDED explains the best fit for this setup; ALTERNATIVE is yours to enable.
-# Choose one option per conflict; do not uncomment every alternative at once.
 
 # --- PATH and language runtimes ------------------------------------------------
-# RECOMMENDED: keep inherited PATH entries, deduplicate, and use Homebrew's prefix.
+
 # This works with the macOS and Linux installers without hardcoding /opt/homebrew.
 unset ZSH ZSH_THEME
 typeset -U path fpath
@@ -22,19 +19,18 @@ export NVM_DIR="$HOME/.nvm"
 [[ ! -s "$NVM_DIR/bash_completion" ]] || source "$NVM_DIR/bash_completion"
 
 # --- Editor and command-line editing ------------------------------------------
-# RECOMMENDED: Neovim matches your submodule and works in terminal/SSH sessions.
+# Neovim matches your submodule and works in terminal/SSH sessions.
 export EDITOR=nvim
 export VISUAL=nvim
-# REVIEW: Incoming Zed preference; choose it if a GUI is your primary editor.
-# ALTERNATIVE: macOS Zed Preview. Replace the two editor exports above if enabled.
+# macOS Zed Preview. Replace the two editor exports above if enabled.
 if [[ $OSTYPE == darwin* && -x "/Applications/Zed Preview.app/Contents/MacOS/cli" ]]; then
   zed() { command "/Applications/Zed Preview.app/Contents/MacOS/cli" "$@"; }
   export EDITOR='"/Applications/Zed Preview.app/Contents/MacOS/cli" --wait'
   export VISUAL="$EDITOR"
 fi
 
-# REVIEW: Editing mode. The current default resolves to viins with EDITOR=nvim.
-# RECOMMENDED: vi mode fits your Neovim usage; an explicit binding is optional.
+# Editing mode. The current default resolves to viins with EDITOR=nvim.
+# vi mode fits your Neovim usage; an explicit binding is optional.
 bindkey -v
 KEYTIMEOUT=10
 
@@ -55,35 +51,25 @@ compinit -d "$HOME/.zcompdump"
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[-_.]=* r:|=*'
 [[ ! -r "$BUN_INSTALL/_bun" ]] || source "$BUN_INSTALL/_bun"
-# REVIEW: Completion matching.
-# RECOMMENDED: current case-insensitive/flexible matching is convenient for daily use.
-# ALTERNATIVE: strict matching; replace the matcher-list above with this line.
-# zstyle ':completion:*' matcher-list ''
-# Incoming CASE_SENSITIVE/HYPHEN_INSENSITIVE variables only configure Oh My Zsh;
-# native Zsh uses the zstyle above, so those duplicate settings are not repeated.
 
-# REVIEW: Incoming fzf and Atuin integrations; packages alone do not bind keys.
-# RECOMMENDED first optional addition: fzf for interactive file/directory search.
 # Keep disabled until you choose its Ctrl-T / Alt-C / Ctrl-R bindings.
-# if (( $+commands[fzf] )); then
-#   if (( $+commands[fd] )); then
-#     export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-#     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-#     export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
-#   fi
-#   export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
-#   # Optional incoming preview; bat must be installed before choosing it.
-#   export FZF_CTRL_T_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || ls -la {}"'
-#   export FZF_ALT_C_OPTS='--preview "ls -la {}"'
-#   source <(fzf --zsh)
-# fi
-# ALTERNATIVE for an older fzf without --zsh: source its installed integration.
-# [[ ! -r "$HOME/.fzf.zsh" ]] || source "$HOME/.fzf.zsh"
-# ALTERNATIVE history backend: Atuin provides richer search with its own database.
+if (( $+commands[fzf] )); then
+  if (( $+commands[fd] )); then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+  fi
+  export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+  # Optional incoming preview; bat must be installed before choosing it.
+  export FZF_CTRL_T_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || ls -la {}"'
+  export FZF_ALT_C_OPTS='--preview "ls -la {}"'
+  source <(fzf --zsh)
+fi
+
 # If choosing both, initialize Atuin AFTER fzf so Atuin owns Ctrl-R.
-# if (( $+commands[atuin] )); then
-#   eval "$(atuin init zsh)"
-# fi
+if (( $+commands[atuin] )); then
+  eval "$(atuin init zsh)"
+fi
 # Sources: https://github.com/junegunn/fzf#setting-up-shell-integration
 #          https://github.com/atuinsh/atuin
 
@@ -91,26 +77,13 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[-_.]=* r:|=*'
 # RECOMMENDED: keep native cd and one canonical ripgrep configuration.
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 alias ..='cd ..'
-# REVIEW: Incoming RIPGREP_CONFIG_PATH=$HOME/.ripgreprc was a second config path.
-# Its optional --smart-case flag is now commented in .config/ripgrep/config.
-# ALTERNATIVE: physical paths instead of cd's normal logical/symlink behavior.
-# alias cd='cd -P'
-# RECOMMENDED optional navigation upgrade: zoxide's z/zi while retaining native cd.
-# if (( $+commands[zoxide] )); then
-#   eval "$(zoxide init zsh)"
-# fi
+alias cd='cd -P'
+if (( $+commands[zoxide] )); then
+  eval "$(zoxide init zsh)"
+fi
 # Source: https://github.com/ajeetdsouza/zoxide#installation
-# Optional try integration; prefer upstream init over a hardcoded Ruby wrapper.
-# if (( $+commands[try] )); then
-#   eval "$(try init "$HOME/Workspace/tries")"
-# fi
-# Optional WSL navigation paths from the incoming setup.
-# if [[ $OSTYPE == linux* && -n ${USERPROFILE:-} ]]; then
-#   cdpath+=("$USERPROFILE/Dropbox" "$USERPROFILE/Downloads")
-# fi
 
 # --- Personal and Git shortcuts ----------------------------------------------
-# RECOMMENDED: keep existing shortcuts to preserve your muscle memory.
 alias -g G='| rg'
 alias -g L='| less'
 alias h=history
@@ -118,15 +91,6 @@ alias ll='ls -lah'
 alias myip='curl https://api.ipify.org; echo'
 alias lips='nmap -sn 192.168.1.0/24'
 alias bup='brew upgrade'
-# REVIEW: Global G/L expand in argument positions too; quote literal G/L as needed.
-# ALTERNATIVE: remove these global shortcuts if that behavior is surprising.
-# unalias -g G L
-# REVIEW: ll with human-readable sizes (current) versus raw byte counts (incoming).
-# alias ll='ls -la'
-# RECOMMENDED: current HTTPS myip endpoint; the incoming HTTP endpoint is optional.
-# alias myip='curl http://ipecho.net/plain; echo'
-# REVIEW: lips scans the current home LAN. Change its subnet for another network.
-
 alias g=git
 alias ga='git add'
 alias gaa='git add --all'
@@ -136,44 +100,36 @@ alias gca='git commit --verbose --all'
 alias gcam='git commit --all --message'
 alias gco='git checkout'
 alias gd='git diff'
-alias gl='git pull'
+alias gpl='git pull'
 alias gp='git push'
 alias gst='git status'
-# REVIEW: gl has two conflicting meanings.
-# RECOMMENDED: keep gl=pull for compatibility and choose a distinct log shortcut.
-# alias glog='git --no-pager log --oneline --decorate -n 10'
-# ALTERNATIVE: incoming gl=log; replace gl above and use gpl for pull.
-# alias gl='git --no-pager log --oneline --decorate -n 10'
-# alias gpl='git pull'
-# Incoming unalias gb conflicts with the explicit branch shortcut; keep it disabled.
-# unalias gb
+alias glog='git --no-pager log --oneline --decorate -n 10'
+alias gl='git --no-pager log --oneline --decorate -n 10'
 
 # Optional nonconflicting incoming shortcuts; enable individually if useful.
-# alias zshconfig='$EDITOR ~/.zshrc'
-# alias lsa='ls -alh'
-# alias sl=ls
-# alias less='less -X'
-# alias unixts='date +%s'
-# alias iso8601="date -u +'%Y-%m-%dT%H:%M:%SZ'"
-# alias nv=nvim
-# alias codexr='codex resume'
-# alias codexa='codex resume --last'
-# alias oc='opencode --continue'
-# alias ocr='opencode run'
-# alias ocs='opencode "$HOME/Workspace/scratch"'
-# alias k=kubectl
-# alias kgs='kubectl get svc -A -o wide'
-# alias kgp='kubectl get pod -A --show-labels'
+alias zshconfig='$EDITOR ~/.zshrc'
+alias lsa='ls -alh'
+alias sl=ls
+alias less='less -X'
+alias unixts='date +%s'
+alias iso8601="date -u +'%Y-%m-%dT%H:%M:%SZ'"
+alias nv=nvim
+alias codexr='codex resume'
+alias codexa='codex resume --last'
+alias oc='opencode --continue'
+alias ocr='opencode run'
+alias ocs='opencode "$HOME/Workspace/scratch"'
+alias k=kubectl
+alias kgs='kubectl get svc -A -o wide'
+alias kgp='kubectl get pod -A --show-labels'
 # RECOMMENDED Python shorthand: follow the installed Python rather than pinning 3.8.
-# alias py=python3
+alias py=python3
 # ALTERNATIVE: only if this legacy interpreter is deliberately installed.
 # alias py=python3.8
 
 # --- Command replacements and containers --------------------------------------
 # RECOMMENDED: btop is installed/configured; retain it as your top replacement.
 (( ! $+commands[btop] )) || alias top=btop
-# ALTERNATIVE: bottom's executable is btm, not the old alias target bottom.
-# (( ! $+commands[btm] )) || alias top=btm
 
 # RECOMMENDED: retain your bat/dust shortcuts, with rcat for native cat behavior.
 if (( $+commands[bat] )); then
@@ -183,9 +139,7 @@ if (( $+commands[bat] )); then
   export MANROFFOPT=-c
 fi
 (( ! $+commands[dust] )) || alias du=dust
-# ALTERNATIVE: native cat/du if you prefer their exact flags and output.
-# unalias cat du
-# unset MANPAGER MANROFFOPT
+
 # REVIEW: native ls/find/ps/tree versus incoming replacements.
 # RECOMMENDED: preserve native command names; use separate shortcuts for new tools.
 # alias ff=fd
@@ -197,7 +151,7 @@ fi
 # ALTERNATIVE process search shortcut; this is grep-based, not an exact PID lookup.
 # alias pid='ps -A -e -l | grep'
 
-# RECOMMENDED: Podman matches Brewfile and your current VM/connection setup.
+# Podman matches Brewfile and your current VM/connection setup.
 if (( $+commands[podman] )); then
   alias docker=podman
   alias pdcl='podman image prune -a'
@@ -253,29 +207,29 @@ fi
 # }
 
 # REVIEW: Incoming Linux administration aliases do not belong in macOS defaults.
-# if [[ $OSTYPE == linux* ]]; then
-#   alias i='sudo apt-get install -y'
-#   alias up='sudo apt-get update && sudo apt-get upgrade -y'
-# fi
+if [[ $OSTYPE == linux* ]]; then
+  alias i='sudo apt-get install -y'
+  alias up='sudo apt-get update && sudo apt-get upgrade -y'
+fi
 # NOT RECOMMENDED: the incoming ownership wrapper is incomplete/broad; use an
 # explicit chown command on a chosen path instead of enabling it as written.
-# alias my="'sudo chown -R $(id -u)'"
+alias my="'sudo chown -R $(id -u)'"
 # ALTERNATIVE macOS DNS helper; it runs only when explicitly invoked, not on startup.
-# if [[ $OSTYPE == darwin* ]]; then
-#   flush-dns() {
-#     sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder
-#   }
-# fi
+if [[ $OSTYPE == darwin* ]]; then
+  flush-dns() {
+    sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder
+  }
+fi
 # REVIEW: legacy airport/private-framework commands are host/version-specific.
 # RECOMMENDED: leave this incoming MAC-changing helper disabled on this setup.
-# if [[ $OSTYPE == darwin* ]]; then
-#   alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
-#   get_new_mac() {
-#     sudo /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -z &&
-#       sudo ifconfig en0 ether "a0$(openssl rand -hex 5 | sed 's/\(.\{2\}\)/:\1/g')" &&
-#       networksetup -detectnewhardware
-#   }
-# fi
+if [[ $OSTYPE == darwin* ]]; then
+  alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
+  get_new_mac() {
+    sudo /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -z &&
+      sudo ifconfig en0 ether "a0$(openssl rand -hex 5 | sed 's/\(.\{2\}\)/:\1/g')" &&
+      networksetup -detectnewhardware
+  }
+fi
 # REVIEW: keep warning suppression off unless you deliberately want this behavior.
 # export NO_D1_WARNING=1
 # Incoming keychain commands referred to another host/user's files; keep them off.
