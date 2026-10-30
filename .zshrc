@@ -287,6 +287,7 @@ unset _dotfiles_brew_prefix
 #   eval "$(zellij setup --generate-auto-start zsh)"
 # fi
 # Bypass the active launcher once with HERDR_AUTO_START=0 zsh.
-if [[ -o interactive && -t 0 && -t 1 && -z ${HERDR_ENV:-} && ${HERDR_AUTO_START:-1} != 0 ]] && (( $+commands[herdr] )); then
+# Auto-start only in Ghostty; Zed Preview and other terminals keep a normal shell.
+if [[ -o interactive && -t 0 && -t 1 && ${TERM_PROGRAM:-} == ghostty && -z ${HERDR_ENV:-} && ${HERDR_AUTO_START:-1} != 0 ]] && (( $+commands[herdr] )); then
   exec herdr
 fi

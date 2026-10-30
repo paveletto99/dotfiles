@@ -1,5 +1,5 @@
 # Imported terminal appearance and behavior preferences.
-Disabled alternatives; the active settings above remain authoritative.
+# Disabled alternatives; the active settings above remain authoritative.
 theme = orng-dark
 minimum-contrast = 1.1
 font-size = 15

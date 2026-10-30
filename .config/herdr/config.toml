@@ -15,8 +15,9 @@ enabled = false
 # Default: "catppuccin".
 # name = "catppuccin"
 
-name = "catppuccin"
+name = "rose-pine"
 auto_switch = false
+
 [theme.custom]
 # Override individual tokens from the base theme. Colors accept #rrggbb, named
 # colors, rgb(r,g,b), or reset aliases such as reset, default, none, and
